@@ -25,12 +25,12 @@
                 <Icon type="ios-navigate"></Icon>
                 用户管理
               </template>
-              <MenuItem name="1-1"><router-link to="showAllUser" class="ziti">查看所有用户</router-link></MenuItem>
-              <MenuItem name="1-2"><router-link to="userEcharts" class="ziti">用户图表统计</router-link></MenuItem>
+              <MenuItem name="1-1"><router-link to="/showAllUser" class="ziti">查看所有用户</router-link></MenuItem>
+              <MenuItem name="1-2"><router-link to="/userEcharts" class="ziti">用户图表统计</router-link></MenuItem>
             </Submenu>
             <MenuItem name="2-1">
               <Icon type="ios-navigate"></Icon>
-              <router-link to="permission" class="ziti"><span>权限管理</span></router-link>
+              <router-link to="/permission" class="ziti"><span>权限管理</span></router-link>
             </MenuItem>
             <!--</Submenu>-->
             <Submenu name="3">
@@ -38,23 +38,23 @@
                 <Icon type="ios-analytics"></Icon>
                 班课管理
               </template>
-              <MenuItem name="4-1"><router-link to="course" class="ziti">全部班课</router-link> </MenuItem>
-              <MenuItem name="4-2"><router-link to="coursePic" class="ziti">班课图表</router-link> </MenuItem>
+              <MenuItem name="3-1"><router-link to="course" class="ziti">全部班课</router-link> </MenuItem>
+              <MenuItem name="3-2"><router-link to="coursePic" class="ziti">班课图表</router-link> </MenuItem>
             </Submenu>
             <Submenu name="4">
               <template slot="title">
                 <Icon type="ios-analytics"></Icon>
                 资源管理
               </template>
-              <MenuItem name="4-1"><router-link to="pieTest">测试</router-link> </MenuItem>
-              <MenuItem name="4-2">Option 2</MenuItem>
+              <MenuItem name="4-1"><router-link to="resourceAll" class="ziti">全部资源</router-link> </MenuItem>
+              <MenuItem name="4-2"><router-link to="resourceChart" class="ziti">资源图表</router-link> </MenuItem>
             </Submenu>
             <Submenu name="5">
               <template slot="title">
                 <Icon type="ios-analytics"></Icon>
                 活动管理
               </template>
-              <MenuItem name="5-1"><router-link to="activityAll" class="ziti">所有活动</router-link> </MenuItem>
+              <MenuItem name="5-1"><router-link to="/activityAll" class="ziti">所有活动</router-link> </MenuItem>
               <MenuItem name="5-2"><router-link to="activityClassify" class="ziti">活动分类</router-link></MenuItem>
             </Submenu>
           </i-menu>

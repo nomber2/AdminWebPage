@@ -5,11 +5,13 @@
       <BreadcrumbItem>activityAll</BreadcrumbItem>
     </Breadcrumb>
     <Content :style="{padding: '24px', minHeight: '500px', background: '#fff'}">
+      <Input v-model="searchContent" @on-change="search1"  icon="search" placeholder="请输入关键字搜搜..."
+             style="width: 30%; margin-bottom: 10px" />
       <Collapse v-model="value" accordion>
         <Panel  v-for="(info, index) in activityInfos" :key="index" >
           <Button type="text">{{info.courseName}}</Button>
           {{info.activityTitle}}
-          <Button type="ghost" style="float:right">{{info.activityStatus | status}}</Button>
+          <Button :type="yangshi" style="float:right">{{info.activityStatus | status}}</Button>
           <p slot="content" >
             <Row style="background:#eee;padding:20px">
             <Card style="width:850px">
@@ -29,17 +31,8 @@
            </Card>
             </Row>
             <span></span><br>
-
           </p>
         </Panel>
-        <!--<Panel name="2">-->
-          <!--斯蒂夫·盖瑞·沃兹尼亚克-->
-          <!--<p slot="content">斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。</p>-->
-        <!--</Panel>-->
-        <!--<Panel name="3">-->
-          <!--乔纳森·伊夫-->
-          <!--<p slot="content">乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</p>-->
-        <!--</Panel>-->
       </Collapse>
     </Content>
   </div>
@@ -53,24 +46,31 @@
       data () {
         return {
           value: '1',
-          activityNames:[],
           activityInfos:[],
+          newInfos:[],
+          searchContent: '',
+          yangshi: 'ghost'
         }
       },
       mounted() {
         const that = this;
-        fly.get('activity/getAllActivityNames')
-          .then(function (response) {
-            let temp = response.data;
-            that.activityNames = temp.data;
-            console.log(that.activityNames);
-          });
         fly.get('activity/getAllActivityInfo')
           .then(function (response) {
             let temp = response.data;
             that.activityInfos = temp.data;
+            that.newInfos = that.activityInfos;
             console.log(temp.data);
           });
+        for (let i in that.activityInfos) {
+          if (that.activityInfos[i].activityStatus === 0) {
+            this.yangshi = 'ghost';
+          } else if (that.activityInfos[i].activityStatus === 1) {
+            this.yangshi = 'primary';
+          } else {
+            this.yangshi = 'dashed';
+          }
+        }
+
       },
       filters: {
           status: function (status) {
@@ -82,6 +82,25 @@
           endTime: function (time) {
             return time === null ? '未设置' : time
           }
+
+      },
+      methods: {
+        search1(){
+          console.log(this.searchContent);
+          if(this.searchContent === '' ){
+            this.activityInfos = this.newInfos;
+          }else {
+            console.log(this.searchContent)
+            this.activityInfos = [];
+            for(var i in this.newInfos){
+              if(this.newInfos[i].courseName.indexOf(this.searchContent) > -1
+                || this.newInfos[i].activityTitle.indexOf(this.searchContent) > -1){
+                this.activityInfos.push(this.newInfos[i]);
+              }
+            }
+            console.log(this.activityInfos);
+          }
+        }
       }
     }
 </script>

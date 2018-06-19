@@ -4,7 +4,7 @@
       <h1>Welcome to 蓝墨云后台管理系统</h1>
       <form :model="ruleForm" :rules="rules" id="form" label-width="0px">
         <input type="text" placeholder="user login" v-model="ruleForm.username"/>
-        <input type="password" placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"/>
+        <input type="password" placeholder="password" v-model="ruleForm.password" />
         <router-link to="home"><input type="submit" value="Login" /></router-link>
       </form>
       <router-view></router-view>
@@ -37,20 +37,20 @@
           }
         },
       methods: {
-      //   submitForm(formName) {
-        //     document.getElementById("form").validate({
-        //       rules: {
-        //         username: [
-        //           { required: true, message: '请输入用户名', trigger: 'blur' }
-        //         ],
-        //         password: [
-        //           { required: true, message: '请输入密码', trigger: 'blur' }
-        //         ]
-        //       },
-        //         localStorage.setItem('ms_username', this.ruleForm.username);
-        //         this.$router.push('/');
-        //   });
-        //   }
+        submitForm(formName) {
+          //   document.getElementById("form").validate({
+          //     rules: {
+          //       username: [
+          //         { required: true, message: '请输入用户名', trigger: 'blur' }
+          //       ],
+          //       password: [
+          //         { required: true, message: '请输入密码', trigger: 'blur' }
+          //       ]
+          //     },
+          //       localStorage.setItem('ms_username', this.ruleForm.username);
+          //       this.$router.push('/');
+          // });
+          }
         }
 
     }
