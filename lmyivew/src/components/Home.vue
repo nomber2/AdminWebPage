@@ -25,8 +25,8 @@
                 <Icon type="ios-navigate"></Icon>
                 用户管理
               </template>
-              <MenuItem name="1-1"><router-link to="/showAllUser" class="ziti">查看所有用户</router-link></MenuItem>
-              <MenuItem name="1-2"><router-link to="/userEcharts" class="ziti">用户图表统计</router-link></MenuItem>
+              <MenuItem name="1-1"><router-link to="showAllUser" class="ziti">查看所有用户</router-link></MenuItem>
+              <MenuItem name="1-2"><router-link to="userEcharts" class="ziti">用户图表统计</router-link></MenuItem>
             </Submenu>
             <MenuItem name="2-1">
               <Icon type="ios-navigate"></Icon>
@@ -54,7 +54,7 @@
                 <Icon type="ios-analytics"></Icon>
                 活动管理
               </template>
-              <MenuItem name="5-1"><router-link to="/activityAll" class="ziti">所有活动</router-link> </MenuItem>
+              <MenuItem name="5-1"><router-link to="activityAll" class="ziti">所有活动</router-link> </MenuItem>
               <MenuItem name="5-2"><router-link to="activityClassify" class="ziti">活动分类</router-link></MenuItem>
             </Submenu>
           </i-menu>

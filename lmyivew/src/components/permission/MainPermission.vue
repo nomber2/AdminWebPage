@@ -14,7 +14,7 @@
               <el-col :span="20">
                 <div class="grid-content bg-purple-light">
                   <el-button type="warning" round style="float:right" @click="cancle">取消</el-button>
-                  <el-button type="success" round style="float:right; padding-bottom: 10px; height: 20px" @click="saveRole">保存</el-button>
+                  <el-button type="success" round style="float:right;" @click="saveRole">保存</el-button>
                 </div>
               </el-col>
             </el-row>
@@ -38,7 +38,7 @@
 <script>
   import rolecomponent from './RolePermission.vue'
   import axios from 'axios'
-  axios.defaults.baseURL = 'http://47.100.222.72:8080/lmy/admin'
+  // axios.defaults.baseURL = 'http://47.100.222.72:8080/lmy/admin'
   export default {
     name: 'mainpermission',
     components: {
@@ -84,14 +84,14 @@
           that.checkAll[index] = false
         });
         console.log(p,86);
-        
+
         if (p.length == 0 || that.roleName == '') {
           this.$alert('请输入角色名称或权限', '提示', {
             confirmButtonText: '确定',
           });
 
         } else {
-          axios.post('role', {
+          axios.post('http://localhost:8080/admin/role', {
               roleName: that.roleName,
               permission: p
             })
@@ -123,11 +123,11 @@
       },
       dataInit() {
         const that = this
-        axios.get('allpermission')
+        axios.get('http://localhost:8080/admin/allpermission')
           .then(function (response) {
             that.allPermission = response.data
             console.log(response.data,129);
-            
+
             console.log(that.allPermission, 46);
 
             console.log(response);
@@ -137,15 +137,15 @@
               }
             });
             console.log(that.commonroot,139);
-            
+
             that.commonroot.forEach((element, i) => {
               that.toppermission[i] = []
               that.checkedCities[i] = []
               that.isIndeterminate[i] = false
               that.checkAll[i] = false
               that.toppermission[i].push(element.itemId)
-              
-              
+
+
               response.data.forEach(function (params) {
                 if (params.parentId == element.itemId) {
                   that.toppermission[i].push(params.itemId)
@@ -155,7 +155,7 @@
             console.log(that.toppermission, 48);
 
           })
-        axios.get('roleandpermission')
+        axios.get('http://localhost:8080/admin/roleandpermission')
           .then(function (response) {
             that.roleAndPermission = response.data
             console.log(that.roleAndPermission, '56');
