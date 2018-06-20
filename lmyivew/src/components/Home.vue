@@ -4,7 +4,7 @@
         <div class="layout-nav">
           <ul class="layui-nav">
             <li class="layui-nav-item">
-              <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '20px 20px 0'}" type="navicon-round" size="20"></Icon>
+              <!--<Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '20px 20px 0'}" type="navicon-round" size="20"></Icon>-->
             </li>
               <li class="layui-nav-item">
                 <a href=""><img src="https://static.cdn.oss.mosoteach.cn/mosoteach2/common/images/logo.png" class="logo"></a>
@@ -69,30 +69,30 @@
 
 <script>
   export default {
-    data () {
-      return {
-        isCollapsed: false
-      }
-    },
-    computed: {
-      rotateIcon () {
-        return [
-          'menu-icon',
-          this.isCollapsed ? 'rotate-icon' : ''
-        ];
-      },
-      menuitemClasses () {
-        return [
-          'submenu',
-          this.isCollapsed ? 'collapsed-menu' : ''
-        ]
-      }
-    },
-    methods: {
-      collapsedSider () {
-        this.$refs.side1.toggleCollapse();
-      }
-    }
+    // data () {
+    //   return {
+    //     isCollapsed: false
+    //   }
+    // },
+    // computed: {
+    //   rotateIcon () {
+    //     return [
+    //       'menu-icon',
+    //       this.isCollapsed ? 'rotate-icon' : ''
+    //     ];
+    //   },
+    //   menuitemClasses () {
+    //     return [
+    //       'submenu',
+    //       this.isCollapsed ? 'collapsed-menu' : ''
+    //     ]
+    //   }
+    // },
+    // methods: {
+    //   collapsedSider () {
+    //     this.$refs.side1.toggleCollapse();
+    //   }
+    // }
   }
 </script>
 

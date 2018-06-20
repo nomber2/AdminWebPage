@@ -21,7 +21,7 @@
             <el-card class="box-card" v-for="(item, index) in commonroot" :key="index">
               <el-checkbox :indeterminate="isIndeterminate[index]" v-model="checkAll[index]" @change="handleCheckAllChange(index)">{{item.menuName}}</el-checkbox>
               <div style="margin: 15px 0;"></div>
-              <el-checkbox-group v-model="checkedCities[index]" @change="handleCheckedCitiesChange(index)">
+              <el-checkbox-group v-model="checkedCities[index]">
                 <el-checkbox :label="item.itemId">基础{{item.menuName}}</el-checkbox>
                 <el-checkbox v-for="city in allPermission" :label="city.itemId" :key="city.itemId" v-if="city.parentId==item.itemId">{{city.menuName}}</el-checkbox>
               </el-checkbox-group>
@@ -61,6 +61,26 @@
     },
     mounted() {
       this.dataInit();
+    },
+    watch: {
+      checkedCities:function (val) {
+        val.forEach((element,index) => {
+          this.checkAll[index] = element.length === this.toppermission[index].length
+
+          if(element.length !== this.toppermission[index].length){
+            console.log(element.length,this.toppermission[index].length);
+            this.isIndeterminate[index]=element.length>0&&this.toppermission[index].length>element.length
+
+
+          }else{
+            this.isIndeterminate[index]=element.length>0&&this.toppermission[index].length>element.length
+          }
+
+
+        });
+
+
+      }
     },
 
     methods: {

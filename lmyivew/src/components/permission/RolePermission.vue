@@ -13,7 +13,7 @@
       <el-card class="box-card" v-for="(item, index) in commonroot" :key="index">
         <el-checkbox :indeterminate="isIndeterminate[index]" v-model="checkAll[index]" @change="handleCheckAllChange(index)">{{item.menuName}}</el-checkbox>
         <div style="margin: 15px 0;"></div>
-        <el-checkbox-group v-model="checkedList[index]" @change="handleCheckedCitiesChange(index)">
+        <el-checkbox-group v-model="checkedList[index]">
           <el-checkbox :label="item.itemId" >基础{{item.menuName}}</el-checkbox>
           <el-checkbox  v-for="one in allpermission" :label="one.itemId" :key="one.itemId" v-if="item.itemId==one.parentId">{{one.menuName}}</el-checkbox>
         </el-checkbox-group>
@@ -51,6 +51,28 @@
     created() {
       this.dataInit();
     },
+    watch: {
+      checkedList:function (val) {
+        val.forEach((element,index) => {
+
+          this.checkAll[index] = element.length === this.alllist[index].length
+
+          if(element.length !== this.alllist[index].length){
+            console.log(element.length,this.alllist[index].length);
+            this.isIndeterminate[index]=element.length>0&&this.alllist[index].length>element.length
+
+
+          }else{
+            this.isIndeterminate[index]=element.length>0&&this.alllist[index].length>element.length
+          }
+
+
+        });
+
+
+      }
+    },
+
     methods: {
       change($e,index,itemId){
         const that = this
@@ -93,25 +115,6 @@
         console.log(this.checkedList[index]);
       }
       ,
-      handleCheckedCitiesChange(index) {
-        // console.log(this.checkedList[index]);
-        // if(this.checkedList[index].length==this.alllist[index].length){
-        //   this.checkAll[index]=true
-        // }
-        // if(this.checkedList[index].length>0&&this.checkedList[index].length<this.alllist[index].length){
-        //   this.isIndeterminate[index]=true
-        // }
-
-          let checkedCount = this.checkedList[index].length;
-          // alert(this.alllist[index].length+"   "+checkedCount);
-          if(!(checkedCount === this.alllist[index].length)){
-            this.checkAll[index] = false;
-            console.log(this.checkAll[index]);
-          }else {
-            this.checkAll[index] = true;
-          }
-        // this.isIndeterminate[index] = checkedCount > 0 && checkedCount < this.alllist[index].length;
-      },
       firstme() {
         console.log(this.role);
         console.log(this.checkedList);
