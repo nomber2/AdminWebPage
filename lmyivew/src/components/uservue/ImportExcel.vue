@@ -116,9 +116,10 @@ import {$axiox} from "../../api";
             this.newData.push(tempObj);
           }
           //*****************************
-          $axiox().post('/user/testImport',this.newData
+          $axiox().post('/user/import',this.newData
           ).then((response) => {
-            console.log(response.data)
+            console.log(response.data);
+            this.$Message.info('导入成功！请刷新该页面')
           }).catch((error) => {
             console.log(error)
           });

@@ -21,6 +21,11 @@ export default {
       this.schoolName = tempData.names;
       this.schoolValue = tempData.values
       myChart2.setOption({
+        title : {
+          text: '用户学校分布',
+          subtext: '数据来源于数据库',
+          x:'center'
+        },
         xAxis: {
           type: 'category',
           data: this.schoolName
@@ -44,5 +49,6 @@ export default {
 #main2 {
   width: 500px;
   height: 400px;
+  /*margin-top: -50px;*/
 }
 </style>

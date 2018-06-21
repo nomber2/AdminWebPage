@@ -1,7 +1,7 @@
 <template>
   <div>
     <Breadcrumb :style="{margin: '24px 0'}">
-      <BreadcrumbItem to="/">Home</BreadcrumbItem>
+      <BreadcrumbItem to="/home">Home</BreadcrumbItem>
       <BreadcrumbItem>permission</BreadcrumbItem>
     </Breadcrumb>
     <Content :style="{padding: '24px', minHeight: '800px', background: '#fff'}">
@@ -46,9 +46,20 @@
         </div>
 
       </div>
+
       <div class="tubiao" style="display: flex">
-        <LineChart></LineChart>
-        <div style="width: 360px; margin-left: 200px; background:#eee;padding: 20px">
+        <div style="width: 56%">
+          <div style="display: flex">
+            <div style="width: 50%; margin-left: -120px; margin-top: 30px">
+              <CoursePic ></CoursePic>
+            </div>
+            <div style="width: 60%; margin-left: 90px">
+              <BarCharts ></BarCharts>
+            </div>
+          </div>
+          <PieChart></PieChart>
+        </div>
+        <div style="width: 44%; margin-left: 200px; background:#eee;padding: 20px">
           <h3 style="font-family: 方正舒体; font-size: 34px">推荐班课</h3>
           <div style="padding-top: 20px"  v-for="(course,index) in CourseTop3" :key="index">
             <Card :bordered="false">
@@ -72,11 +83,15 @@
 
 <script>
     import LineChart from "./LineChart";
+    import PieCharts from "../uservue/PieCharts";
+    import PieChart from "../activity/PieChart";
+    import CoursePic from "../course/CoursePic";
+    import BarCharts from "../uservue/BarCharts"
     let fly = require('flyio')
     fly.config.baseURL = "http://localhost:8080/"
     export default {
         name: "Home",
-      components: {LineChart},
+      components: {PieCharts, LineChart,PieChart, CoursePic, BarCharts},
       data () {
         return {
           value: 0,

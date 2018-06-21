@@ -75,7 +75,7 @@
             key: 'userBirth',
             render: (h,params) =>{
               const row = params.row;
-              return h('div',new Date(row.userBirth).Format('yyyy-MM-dd'))
+              return h('div',row.userBirth === null ? 'null': new Date(row.userBirth).Format('yyyy-MM-dd'))
             }
           },
           {
@@ -141,6 +141,7 @@
       async getAllShowUserInfo() {
         let tempData = await getShowUserInfo();
         this.allData = tempData.data;
+        console.log(this.allData)
         this.allCount = this.allData.length;
         this.totalPage = Math.ceil(this.allCount / this.showCount) * 10;
         this.init()

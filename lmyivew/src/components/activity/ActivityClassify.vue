@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import PieCharts from "./PieCharts";
+  import PieCharts from "./PieChart";
 
   var fly = require('flyio')
   fly.config.baseURL = "http://localhost:8080/"

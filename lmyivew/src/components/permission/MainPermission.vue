@@ -116,9 +116,9 @@
               permission: p
             })
             .then(function (response) {
-              console.log(response.data);
+              console.log(response.data,1119);
               that.newRole();
-              that.roleAndPermission.push(response.data)
+              that.roleAndPermission.push(response)
               that.roleName = ''
               that.$message({
                 message: '添加角色成功',

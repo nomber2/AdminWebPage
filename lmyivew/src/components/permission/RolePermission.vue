@@ -23,7 +23,7 @@
 </template>
 <script>
   import fly from 'flyio';
-  fly.config.baseURL = "http://www.fanweijs.top:8080/lmy/admin/"
+  fly.config.baseURL = "http://localhost:8080/"
   // import axios from 'axios'
   //   axios.defaults.baseURL = 'http://47.100.222.72:8080/lmy/admin'
 
@@ -108,7 +108,7 @@
         });
       },
       handleCheckAllChange(index) {
-        alert(index);
+        // alert(index);
         console.log(this.checkedList[index]);
         this.checkedList[index] = this.checkAll[index] ? this.alllist[index] : [];
         this.isIndeterminate[index] = false;
@@ -127,7 +127,7 @@
           type: 'warning'
         }).then(() => {
           const that = this
-          fly.delete('role', {
+          fly.delete('admin/role', {
               roleId: that.currentrole.roleId
             })
             .then(function (response) {
@@ -160,7 +160,7 @@
             p.push(element)
           });
         })
-        fly.post('changerole', {
+        fly.post('admin/changerole', {
             roleId: that.currentrole.roleId,
             message: p
           })

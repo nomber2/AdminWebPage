@@ -1,5 +1,5 @@
 <template>
-  <div id="main3" style="width: 900px;height:400px;"></div>
+  <div id="main3" style="width: 840px;height:400px; margin-left: -80px"></div>
 </template>
 
 <script>
@@ -30,8 +30,8 @@
                     // backgroundColor: '#2c343c',
 
                     title: {
-                      text: '南丁格尔玫瑰图',
-                      subtext: '纯属虚构',
+                      text: '活动分类玫瑰图',
+                      subtext: '数据来源于数据库',
                       x: 'center'
                     },
                     tooltip: {

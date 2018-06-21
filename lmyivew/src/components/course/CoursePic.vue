@@ -1,13 +1,5 @@
 <template>
-  <div>
-    <Breadcrumb :style="{margin: '24px 0'}">
-      <BreadcrumbItem to="/">Home</BreadcrumbItem>
-      <BreadcrumbItem>permission</BreadcrumbItem>
-    </Breadcrumb>
-    <Content :style="{padding: '24px', minHeight: '500px', background: '#fff'}">
-      <div class="chart" ref="chartOne" :style="{width: '500px', height: '500px'}"></div>
-    </Content>
-  </div>
+      <div class="chart" ref="chartOne" style="width: 500px; height: 400px;"></div>
 </template>
 
 <script>
@@ -38,25 +30,25 @@
           let chartOne=echarts.init(this.$refs.chartOne);
           chartOne.setOption({
             title : {
-              text: '某站点用户访问来源',
-              subtext: '纯属虚构',
+              text: '班课类型分布',
+              subtext: '数据来源于数据库',
               x:'center'
             },
             tooltip : {
               trigger: 'item',
               formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
-            legend: {
-              orient: 'vertical',
-              left: 'left',
-              data: ['进行中的班课','已结束的班课']
-            },
+            // legend: {
+            //   orient: 'vertical',
+            //   left: 'left',
+            //   data: ['进行中的班课','已结束的班课']
+            // },
             series : [
               {
                 name: '访问来源',
                 type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
+                radius : '44%',
+                center: ['50%', '40%'],
                 data:[
                   {value: this.run, name:'进行中的班课'},
                   {value: this.end, name:'已结束的班课'},
@@ -82,8 +74,3 @@
 </style>
 
 
-
-
-
-
-//8888888888
