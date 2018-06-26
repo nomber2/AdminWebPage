@@ -15,3 +15,7 @@ export let getShowUserInfo = () => {
 export let getSchoolSta = () => {
   return axios.get('/user/schoolSta')
 };
+
+export let getAllUserCount = () => {
+  return axios.get('/user/getCountUser')
+};

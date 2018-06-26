@@ -11,6 +11,7 @@ import ActivityClassify from '@/components/activity/ActivityClassify'
 import ResourceAll from '@/components/resource/ResourceAll'
 import ResourceChart from '@/components/resource/ResourceChart'
 import Home from '@/components/home/Home'
+import Editor from '@/components/editor/Editor'
 
 
 Vue.use(Router)
@@ -69,6 +70,10 @@ export default new Router({
         {
           path: '/resourceChart',
           component: ResourceChart
+        },
+        {
+          path: '/editor',
+          component: Editor
         }
 
       ]

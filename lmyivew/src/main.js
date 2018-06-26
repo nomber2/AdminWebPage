@@ -12,8 +12,13 @@ import fly from 'flyio';
 import 'flyio/dist/npm/fly'
 import echarts from 'echarts'
 import 'echarts/dist/echarts'
+import '../static/UE/ueditor.config.js'
+import '../static/UE/ueditor.all.min.js'
+import '../static/UE/lang/zh-cn/zh-cn.js'
+import '../static/UE/ueditor.parse.min.js'
 
 Vue.config.productionTip = false
+
 Vue.use(iView);
 Vue.use(scriptLoader);
 Vue.use(ElementUI);

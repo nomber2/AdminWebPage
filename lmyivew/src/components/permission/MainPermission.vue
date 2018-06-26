@@ -1,39 +1,48 @@
 <template>
-  <div id="mainpermission">
-    <el-row :gutter="20">
-      <el-col :span="24" :offset="0">
-        <div class="grid-content bg-purple role">
-          <el-button type="primary" icon="el-icon-plus" round @click="newRole"></el-button>
-          <el-card class="box-card" v-if="visible">
-            <el-row>
-              <el-col :span="4">
-                <div class="grid-content bg-purple">
-                  <el-input v-model="roleName" placeholder="请输入角色名称"></el-input>
-                </div>
-              </el-col>
-              <el-col :span="20">
-                <div class="grid-content bg-purple-light">
-                  <el-button type="warning" round style="float:right" @click="cancle">取消</el-button>
-                  <el-button type="success" round style="float:right;" @click="saveRole">保存</el-button>
-                </div>
-              </el-col>
-            </el-row>
-            <el-card class="box-card" v-for="(item, index) in commonroot" :key="index">
-              <el-checkbox :indeterminate="isIndeterminate[index]" v-model="checkAll[index]" @change="handleCheckAllChange(index)">{{item.menuName}}</el-checkbox>
-              <div style="margin: 15px 0;"></div>
-              <el-checkbox-group v-model="checkedCities[index]">
-                <el-checkbox :label="item.itemId">基础{{item.menuName}}</el-checkbox>
-                <el-checkbox v-for="city in allPermission" :label="city.itemId" :key="city.itemId" v-if="city.parentId==item.itemId">{{city.menuName}}</el-checkbox>
-              </el-checkbox-group>
-            </el-card>
-          </el-card>
-          <rolecomponent class="role" v-for="(item, index) in roleAndPermission" :key="index" :p="item.permission" :role="item.role"
-            :root="commonroot" :toplist="toppermission" :allpermission="allPermission"></rolecomponent>
-          <!-- <rolecomponent :p="roleAndPermission[0].permission" :role="roleAndPermission[0].role" :root="commonroot" :toplist="toppermission" :allpermission="allPermission"></rolecomponent> -->
-        </div>
-      </el-col>
-    </el-row>
+  <div>
+    <Breadcrumb :style="{margin: '24px 0'}">
+      <BreadcrumbItem to="/home">Home</BreadcrumbItem>
+      <BreadcrumbItem>permission</BreadcrumbItem>
+    </Breadcrumb>
+    <Content :style="{padding: '24px', minHeight: '500px', background: '#eee'}">
+      <div id="mainpermission">
+        <el-row :gutter="20">
+          <el-col :span="24" :offset="0">
+            <div class="grid-content bg-purple role">
+              <el-button type="primary" icon="el-icon-plus" round @click="newRole"></el-button>
+              <el-card class="box-card" v-if="visible">
+                <el-row>
+                  <el-col :span="4">
+                    <div class="grid-content bg-purple">
+                      <el-input v-model="roleName" placeholder="请输入角色名称"></el-input>
+                    </div>
+                  </el-col>
+                  <el-col :span="20">
+                    <div class="grid-content bg-purple-light">
+                      <el-button type="warning" round style="float:right" @click="cancle">取消</el-button>
+                      <el-button type="success" round style="float:right;" @click="saveRole">保存</el-button>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-card class="box-card" v-for="(item, index) in commonroot" :key="index">
+                  <el-checkbox :indeterminate="isIndeterminate[index]" v-model="checkAll[index]" @change="handleCheckAllChange(index)">{{item.menuName}}</el-checkbox>
+                  <div style="margin: 15px 0;"></div>
+                  <el-checkbox-group v-model="checkedCities[index]">
+                    <el-checkbox :label="item.itemId">基础{{item.menuName}}</el-checkbox>
+                    <el-checkbox v-for="city in allPermission" :label="city.itemId" :key="city.itemId" v-if="city.parentId==item.itemId">{{city.menuName}}</el-checkbox>
+                  </el-checkbox-group>
+                </el-card>
+              </el-card>
+              <rolecomponent class="role" v-for="(item, index) in roleAndPermission" :key="index" :p="item.permission" :role="item.role"
+                             :root="commonroot" :toplist="toppermission" :allpermission="allPermission"></rolecomponent>
+              <!-- <rolecomponent :p="roleAndPermission[0].permission" :role="roleAndPermission[0].role" :root="commonroot" :toplist="toppermission" :allpermission="allPermission"></rolecomponent> -->
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </Content>
   </div>
+
 </template>
 <script>
   import rolecomponent from './RolePermission.vue'
@@ -187,10 +196,6 @@
 
 </script>
 <style scoped>
-  #mainpermission {
-    margin-top: 2%
-  }
-
   .role {
     margin-top: 2%
   }

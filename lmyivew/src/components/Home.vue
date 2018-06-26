@@ -49,6 +49,10 @@
               <Icon type="ios-speedometer"></Icon>
               <router-link to="/activityAll" class="ziti"><span>活动管理</span></router-link>
             </MenuItem>
+            <MenuItem name="6-1">
+              <Icon type="ios-speedometer"></Icon>
+              <router-link to="/editor" class="ziti"><span>发布消息</span></router-link>
+            </MenuItem>
             <!--</Submenu>-->
             <!--<Submenu name="3">-->
               <!--<template slot="title">-->

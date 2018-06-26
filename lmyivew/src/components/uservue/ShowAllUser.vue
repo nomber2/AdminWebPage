@@ -8,12 +8,10 @@
       <div class="table">
         <Row type="flex" justify="start">
           <Col span="3">
-            <Input v-model="searchName" @on-change="handleSearch" icon="search" placeholder="请输入姓名搜搜..."
-                   style="width: 100%" />
+            <Input v-model="searchName" @on-change="handleSearch" icon="search" placeholder="请输入姓名搜搜..." style="width: 200px" />
           </Col>
           <Col span="12">
-            <Input v-model="searchSchool" @on-change="handleSearch" icon="search" placeholder="请输入学校搜搜..."
-                   style="width: 30%; margin-left: 50px" />
+            <Input v-model="searchSchool" @on-change="handleSearch" icon="search" placeholder="请输入学校搜搜..." style="width: 250px; margin-left: 100px" />
           </Col>
         </Row>
         <Table :data="showData" :columns="tableColumns" stripe></Table>
@@ -41,14 +39,14 @@
 </template>
 
 <script>
-  import DownloadExcel from './DownloadExcelModel.vue'
+  import {getShowUserInfo,$axiox,getAllUserCount} from "../../api";
   import ImportExcel from './ImportExcel.vue'
-  import {getShowUserInfo,$axiox} from "../../api";
+  import DownloadExcel from './DownloadExcelModel.vue'
   export default {
     name: "ShowAllUser",
     components: {
-      DownloadExcel,
-      ImportExcel
+      ImportExcel,
+      DownloadExcel
     },
     data () {
       return {
@@ -58,7 +56,7 @@
         showData: [],
         tempData:[],
         allCount: null,
-        showCount: 5,
+        showCount: 6,
         totalPage: null,
         currentPage: 1,
         tableColumns: [
@@ -75,7 +73,7 @@
             key: 'userBirth',
             render: (h,params) =>{
               const row = params.row;
-              return h('div',row.userBirth === null ? 'null': new Date(row.userBirth).Format('yyyy-MM-dd'))
+              return h('div',row.userBirth === null ? 'null' : new Date(row.userBirth).Format('yyyy-MM-dd'))
             }
           },
           {
@@ -85,6 +83,25 @@
           {
             title: 'Department',
             key: 'userDepartment',
+          },
+          {
+            title: 'Action',
+            key: 'action',
+            render: (h,params) => {
+              return h('div',[
+                h('Button',{
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  on: {
+                    click: () => {
+                      this.changeStatus(params.index)
+                    }
+                  }
+                },'启/禁')
+              ])
+            }
           },
           {
             title: 'Status',
@@ -100,79 +117,56 @@
                 }
               }, text);
             }
-          },
-          {
-            title: 'Action',
-            key: 'action',
-            render: (h,params) => {
-              return h('div',[
-                h('Button',{
-                  props: {
-                    type: 'primary',
-                    size: 'small',
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.show(params.index)
-                    }
-                  }
-                },'View'),
-                h('Button',{
-                  props: {
-                    type: 'primary',
-                    size: 'small'
-                  },
-                  on: {
-                    click: () => {
-                      this.changeStatus(params.index)
-                    }
-                  }
-                },'Modify')
-              ])
-            }
           }
         ]
       }
     },
     methods: {
-      async getAllShowUserInfo() {
-        let tempData = await getShowUserInfo();
-        this.allData = tempData.data;
-        console.log(this.allData)
-        this.allCount = this.allData.length;
+      async getAllShowUserCount(){
+        let tempData = await getAllUserCount();
+        this.allCount = tempData.data;
         this.totalPage = Math.ceil(this.allCount / this.showCount) * 10;
-        this.init()
+        this.init();
       },
       init() {
         if(this.allCount>this.showCount){
-          this.tempData = this.allData.slice(0,this.showCount);
+          $axiox().post('/user/queryUserPageShow',{
+            beginIndex: 0,
+            endIndex: this.showCount
+          }).then((response) => {
+            this.tempData = response.data;
+            this.showData = this.tempData;
+            console.log(this.tempData)
+          }).catch((error) => {
+            console.log(error)
+          });
         }else {
-          this.tempData = this.allData;
+          $axiox().post('/user/queryUserPageShow',{
+            beginIndex: 0,
+            endIndex: this.showCount
+          }).then((response) => {
+            this.tempData = response.data;
+            this.showData = this.tempData;
+          }).catch((error) => {
+            console.log(error)
+          });
         }
-        this.showData = this.tempData;
       },
       changePage(val){
         let currentPageNumber = parseInt(`${val}`);
         if(currentPageNumber === 1){
           this.init();
         }else {
-          if (currentPageNumber * this.showCount < this.allCount){
-            this.tempData = this.allData.slice( (currentPageNumber - 1 ) * this.showCount ,currentPageNumber * this.showCount);
+          $axiox().post('/user/queryUserPageShow',{
+            beginIndex: (currentPageNumber - 1 ) * this.showCount,
+            endIndex: this.showCount
+          }).then((response) => {
+            this.tempData = response.data;
             this.showData = this.tempData;
-          }else {
-            this.tempData = this.allData.slice((currentPageNumber - 1 ) * this.showCount);
-            this.showData = this.tempData;
-          }
+          }).catch((error) => {
+            console.log(error)
+          });
         }
-      },
-      show(index) {
-        this.$Modal.info({
-          title: 'User Info',
-          content: `Name：${this.showData[index].userName}<br>Status：${this.showData[index].userStatus}<br>School：${this.showData[index].userSchool}`
-        })
       },
       changeStatus(index) {
         let oldStatus = this.showData[index].userStatus;
@@ -206,14 +200,14 @@
         this.showData = this.search(this.showData, {userName: this.searchName,userSchool: this.searchSchool});
       },
       exportData() {
-        this.downloadLoading = true
+        this.downloadLoading = true;
         require.ensure([], () => {
-          const {export_json_to_excel} = require('../../vendor/Export2Excel')
-          const tHeader = this.cutValue(this.tableColumns, 'title')
-          const filterVal = this.cutValue(this.tableColumns, 'key')
-          const list = this.showData
-          const data = this.formatJson(filterVal, list)
-          export_json_to_excel(tHeader, data, '列表excel')
+          const {export_json_to_excel} = require('../../vendor/Export2Excel');
+          const tHeader = this.cutValue(this.tableColumns, 'title');
+          const filterVal = this.cutValue(this.tableColumns, 'key');
+          const list = this.showData;
+          const data = this.formatJson(filterVal, list);
+          export_json_to_excel(tHeader, data, '列表excel');
           this.downloadLoading = false
         })
       },
@@ -248,8 +242,8 @@
       }
     },
     created() {
-      this.getAllShowUserInfo();
       this.initFormatter();
+      this.getAllShowUserCount();
     }
   }
 </script>
