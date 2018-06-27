@@ -120,7 +120,7 @@
           });
 
         } else {
-          axios.post('http://localhost:8080/admin/role', {
+          axios.post('http://120.79.26.171:8080/lmy/admin/role', {
               roleName: that.roleName,
               permission: p
             })
@@ -152,7 +152,7 @@
       },
       dataInit() {
         const that = this
-        axios.get('http://localhost:8080/admin/allpermission')
+        axios.get('http://120.79.26.171:8080/lmy/admin/allpermission')
           .then(function (response) {
             that.allPermission = response.data
             console.log(response.data,129);
@@ -184,7 +184,7 @@
             console.log(that.toppermission, 48);
 
           })
-        axios.get('http://localhost:8080/admin/roleandpermission')
+        axios.get('http://120.79.26.171:8080/lmy/admin/roleandpermission')
           .then(function (response) {
             that.roleAndPermission = response.data
             console.log(that.roleAndPermission, '56');

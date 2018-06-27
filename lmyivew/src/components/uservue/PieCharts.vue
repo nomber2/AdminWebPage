@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     let myChart1 = echart1.init(document.getElementById('main1'));
-    $axiox().get('/user/idenSta').then((response) => {
+    $axiox().get('lmy/user/idenSta').then((response) => {
       let tempData = response.data;
       this.pieData = tempData;
       myChart1.setOption({

@@ -93,7 +93,7 @@
               <Col span="8">
                 <div style="margin-top: 30px; margin-left: 10px; " >
                   <div style="display: block;" :id="kapian(index)">
-                    <img :src="resources.courseLogoURL" style="width: 100%; height: 160px; border-radius: 10px">
+                    <img :src="resources.courseLogoURL" style="width: 100%; height: 180px; border-radius: 10px">
                   </div>
                   <Button long @click="showCourseByClass(index)">{{resources.courseName}}</Button>
                   <div style="display: none;" :id="KechengID(index)">
@@ -128,7 +128,7 @@
 
 <script>
   var fly2 = require('flyio')
-  fly2.config.baseURL = "http://localhost:8080/"
+  fly2.config.baseURL = "http://120.79.26.171:8080/lmy/"
 
     export default {
         name: "ResourceAll",

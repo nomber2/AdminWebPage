@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     let myChart2 = echart2.init(document.getElementById('main2'));
-    $axiox().get('/user/schoolSta').then((response) => {
+    $axiox().get('lmy/user/schoolSta').then((response) => {
       let tempData = response.data;
       this.schoolName = tempData.names;
       this.schoolValue = tempData.values

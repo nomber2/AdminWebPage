@@ -88,7 +88,7 @@
     import CoursePic from "../course/CoursePic";
     import BarCharts from "../uservue/BarCharts"
     let fly = require('flyio')
-    fly.config.baseURL = "http://localhost:8080/"
+    fly.config.baseURL = "http://120.79.26.171:8080/lmy/"
     export default {
         name: "Home",
       components: {PieCharts, LineChart,PieChart, CoursePic, BarCharts},

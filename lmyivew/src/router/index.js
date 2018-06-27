@@ -12,6 +12,7 @@ import ResourceAll from '@/components/resource/ResourceAll'
 import ResourceChart from '@/components/resource/ResourceChart'
 import Home from '@/components/home/Home'
 import Editor from '@/components/editor/Editor'
+import Heditor from '@/components/editor/Heditor'
 
 
 Vue.use(Router)
@@ -74,6 +75,10 @@ export default new Router({
         {
           path: '/editor',
           component: Editor
+        },
+        {
+          path: '/history',
+          component: Heditor
         }
 
       ]

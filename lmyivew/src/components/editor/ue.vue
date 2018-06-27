@@ -35,12 +35,17 @@
     methods: {
       getUEContent() { // 获取内容方法
         const that = this;
+        const h = this.$createElement;
+
+
         axios.post('http://120.79.26.171:8080/lmy/editor', {
           content: that.editor.getContent()
         })
           .then(function (response) {
-            console.log(response);
-            console.log(that.editor.getContent());
+            that.$message({
+              type: 'success',
+              message: '保存成功'
+            });
           })
           .catch(function (error) {
             console.log(error);

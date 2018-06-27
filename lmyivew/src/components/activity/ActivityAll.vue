@@ -51,7 +51,7 @@
 
 <script>
   var fly = require('flyio')
-  fly.config.baseURL = "http://localhost:8080/"
+  fly.config.baseURL = "http://120.79.26.171:8080/lmy/"
     export default {
         name: "ActiveManage",
       data () {

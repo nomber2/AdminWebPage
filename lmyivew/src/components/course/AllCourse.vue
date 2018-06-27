@@ -81,7 +81,7 @@
       },
       dataInit(){
         let that = this;
-        axios.get('http://localhost:8080/course/showCourses')
+        axios.get('http://120.79.26.171:8080/lmy/course/showCourses')
           .then((res) => {
             for(var i in res.data){
               var status = res.data[i].courseStatus;

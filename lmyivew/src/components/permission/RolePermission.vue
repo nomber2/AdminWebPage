@@ -23,7 +23,7 @@
 </template>
 <script>
   import fly from 'flyio';
-  fly.config.baseURL = "http://localhost:8080/"
+  fly.config.baseURL = "http://120.79.26.171:8080/lmy/"
   // import axios from 'axios'
   //   axios.defaults.baseURL = 'http://47.100.222.72:8080/lmy/admin'
 
@@ -60,6 +60,7 @@
           if(element.length !== this.alllist[index].length){
             console.log(element.length,this.alllist[index].length);
             this.isIndeterminate[index]=element.length>0&&this.alllist[index].length>element.length
+            // this.checkAll[index] = element.length === this.alllist[index].length
 
 
           }else{
@@ -104,7 +105,13 @@
         that.toplist.forEach((element, index) => {
           if (element.length == that.checkedList[index].length) {
             that.checkAll[index] = true
+          }else if(that.checkedList[index].length===0){
+            that.isIndeterminate[index]=false
+          }else{
+            that.isIndeterminate[index]=true
           }
+
+
         });
       },
       handleCheckAllChange(index) {

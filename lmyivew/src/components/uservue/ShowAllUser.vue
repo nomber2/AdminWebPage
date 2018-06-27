@@ -130,7 +130,7 @@
       },
       init() {
         if(this.allCount>this.showCount){
-          $axiox().post('/user/queryUserPageShow',{
+          $axiox().post('lmy/user/queryUserPageShow',{
             beginIndex: 0,
             endIndex: this.showCount
           }).then((response) => {
@@ -141,7 +141,7 @@
             console.log(error)
           });
         }else {
-          $axiox().post('/user/queryUserPageShow',{
+          $axiox().post('lmy/user/queryUserPageShow',{
             beginIndex: 0,
             endIndex: this.showCount
           }).then((response) => {
@@ -157,7 +157,7 @@
         if(currentPageNumber === 1){
           this.init();
         }else {
-          $axiox().post('/user/queryUserPageShow',{
+          $axiox().post('lmy/user/queryUserPageShow',{
             beginIndex: (currentPageNumber - 1 ) * this.showCount,
             endIndex: this.showCount
           }).then((response) => {
@@ -173,7 +173,7 @@
         this.showData[index].userStatus = oldStatus === 0 ? 1 : 0;
         let newStatus = this.showData[index].userStatus;
         let statusText = newStatus === 0 ? '启用' : '禁用';
-        $axiox().post('/user/modifyUserStatus',{
+        $axiox().post('lmy/user/modifyUserStatus',{
           userAccount: this.showData[index].userAccount,
           userStatus: newStatus
         }).then((response) => {
@@ -197,6 +197,7 @@
       },
       handleSearch () {
         this.showData = this.tempData;
+        console.log(this.showData)
         this.showData = this.search(this.showData, {userName: this.searchName,userSchool: this.searchSchool});
       },
       exportData() {

@@ -23,7 +23,7 @@
     },
 
     mounted(){
-      axios.get('http://localhost:8080/course/statusCount')
+      axios.get('http://120.79.26.171:8080/lmy/course/statusCount')
         .then((res) => {
           this.run = res.run;
           this.end = res.end;

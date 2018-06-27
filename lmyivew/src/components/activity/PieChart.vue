@@ -6,7 +6,7 @@
   let echarts3 = require('echarts/lib/echarts');
   require('echarts/lib/chart/pie')
   var fly1 = require('flyio')
-  fly1.config.baseURL = "http://localhost:8080/"
+  fly1.config.baseURL = "http://120.79.26.171:8080/lmy/"
     export default {
         name: "PieCharts",
       data() {
